@@ -9,15 +9,19 @@
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
         
         :root {
-            --primary: #14b8a6; /* Teal */
-            --secondary: #f59e0b; /* Amber */
-            --bg: #041e23; /* Deep Midnight Teal */
-            --accent: #fb7185; /* Rose */
+            --primary: #facc15; /* Bright Yellow */
+            --secondary: #ffffff; /* White */
+            --bg: #000000; /* Pure Black */
+            --accent: #262626; /* Dark Gray */
+            --glass: rgba(10, 10, 10, 0.9);
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg);
+            /* Technical Dot Pattern */
+            background-image: radial-gradient(rgba(250, 204, 21, 0.15) 1px, transparent 1px);
+            background-size: 40px 40px;
             color: #f8fafc;
             margin: 0;
             overflow: hidden;
@@ -53,23 +57,24 @@
             transform: translateZ(0px) rotateY(0deg) scale(1);
         }
 
-        /* Storytelling Navigation Transitions */
+        /* 3D Transitions */
         .slide-container.prev { 
-            transform: translateZ(-800px) rotateY(-60deg) translateX(-120%) scale(0.8); 
+            transform: translateZ(-1200px) rotateX(10deg) rotateY(-30deg) translateX(-150%) scale(0.6); 
             opacity: 0; 
         }
         .slide-container.next { 
-            transform: translateZ(-800px) rotateY(60deg) translateX(120%) scale(0.8); 
+            transform: translateZ(-1200px) rotateX(-10deg) rotateY(30deg) translateX(150%) scale(0.6); 
             opacity: 0; 
         }
 
         .card {
-            background: rgba(10, 45, 52, 0.85);
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(20, 184, 166, 0.2);
-            border-radius: 40px;
-            padding: 4rem;
-            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.7);
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(250, 204, 21, 0.2);
+            border-radius: 20px; /* Sharper, industrial corners */
+            padding: 3.5rem;
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 1), 
+                        inset 0 0 40px rgba(250, 204, 21, 0.05);
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -77,71 +82,105 @@
             overflow: hidden;
         }
 
-        /* Font Animations */
+        /* Typography Animations */
         .animate-reveal {
             opacity: 0;
             transform: translateY(30px);
+            filter: blur(5px);
             transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         .active .animate-reveal {
             opacity: 1;
             transform: translateY(0);
+            filter: blur(0);
         }
 
-        .delay-1 { transition-delay: 0.3s; }
-        .delay-2 { transition-delay: 0.5s; }
-        .delay-3 { transition-delay: 0.7s; }
+        .shimmer-text {
+            background: linear-gradient(90deg, #facc15, #ffffff, #facc15);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 4s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
 
         .title-font {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
         }
 
-        .evidence-placeholder {
-            border: 2px dashed rgba(245, 158, 11, 0.3);
-            background: rgba(245, 158, 11, 0.03);
-            border-radius: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 200px;
-            color: var(--secondary);
-            transition: all 0.4s ease;
-            margin-top: 1.5rem;
+        /* Evidence Box Styling */
+        .evidence-box {
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
             position: relative;
+            height: 100%;
+            min-height: 280px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        .evidence-placeholder:hover {
-            border-color: var(--secondary);
-            background: rgba(245, 158, 11, 0.08);
-            transform: scale(1.02);
+        .evidence-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(1) contrast(1.2); /* Stylized look */
+            opacity: 0.6;
+            transition: all 0.5s ease;
+        }
+
+        .evidence-box:hover .evidence-img {
+            opacity: 1;
+            filter: grayscale(0) contrast(1);
+        }
+
+        .evidence-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px;
+            background: var(--primary);
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #000;
         }
 
         .nav-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 1.2rem 2.5rem;
-            border-radius: 99px;
-            font-weight: 800;
+            background: #111;
+            border: 1px solid var(--accent);
+            color: #777;
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.75rem;
-            transition: all 0.4s;
-            backdrop-filter: blur(10px);
+            letter-spacing: 4px;
+            font-size: 0.65rem;
+            transition: all 0.3s;
         }
 
         .nav-btn:hover {
             background: var(--primary);
             border-color: var(--primary);
-            color: var(--bg);
-            box-shadow: 0 0 30px rgba(20, 184, 166, 0.4);
+            color: #000;
+            box-shadow: 0 0 30px rgba(250, 204, 21, 0.4);
         }
 
         .progress-dot-container {
             position: fixed;
-            left: 3rem;
+            right: 4rem;
             top: 50%;
             transform: translateY(-50%);
             display: flex;
@@ -151,62 +190,60 @@
         }
 
         .v-dot {
-            width: 6px;
-            height: 6px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            transition: all 0.5s;
+            width: 4px;
+            height: 20px;
+            background: #222;
+            transition: all 0.4s;
+            cursor: pointer;
         }
 
         .v-dot.active {
-            height: 30px;
-            border-radius: 10px;
-            background: var(--secondary);
-            box-shadow: 0 0 15px var(--secondary);
+            background: var(--primary);
+            box-shadow: 0 0 15px var(--primary);
+            height: 40px;
         }
 
         .rubric-badge {
-            background: var(--accent);
-            color: white;
+            background: var(--primary);
+            color: #000;
             font-size: 0.6rem;
-            padding: 5px 14px;
-            border-radius: 99px;
+            padding: 4px 12px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             display: inline-block;
             margin-bottom: 1.5rem;
         }
 
-        .glow-line {
-            height: 2px;
-            width: 60px;
-            background: var(--secondary);
-            margin: 1.5rem 0;
-            box-shadow: 0 0 10px var(--secondary);
-        }
-
-        /* Floating background orbs */
-        .orb {
+        /* Floating Background Items */
+        .bg-element {
             position: fixed;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(20, 184, 166, 0.08) 0%, transparent 70%);
-            filter: blur(80px);
+            opacity: 0.05;
             z-index: -1;
+            pointer-events: none;
+            filter: invert(1);
+            animation: float 20s infinite alternate cubic-bezier(0.4, 0, 0.6, 1);
         }
 
-        table { width: 100%; border-collapse: separate; border-spacing: 0 12px; }
-        td { padding: 16px; background: rgba(255,255,255,0.02); font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.05); }
-        td:first-child { border-radius: 16px 0 0 16px; font-weight: 700; color: var(--secondary); }
-        td:last-child { border-radius: 0 16px 16px 0; color: #94a3b8; }
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(100px, 50px) rotate(15deg); }
+        }
+
+        table { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+        td { padding: 14px 18px; background: rgba(255,255,255,0.03); font-size: 0.85rem; border: 1px solid #1a1a1a; }
+        td:first-child { font-weight: 800; color: var(--primary); border-left: 3px solid var(--primary); }
     </style>
 </head>
 <body>
 
-    <div class="orb" style="top: -10%; left: -10%;"></div>
-    <div class="orb" style="bottom: -10%; right: -10%; background: radial-gradient(circle, rgba(245, 158, 11, 0.05) 0%, transparent 70%);"></div>
+    <!-- Background Elements -->
+    <svg class="bg-element" style="top: 10%; left: 5%; width: 300px; height: 300px;" viewBox="0 0 24 24">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/> <!-- Home Icon -->
+    </svg>
+    <svg class="bg-element" style="bottom: 10%; right: 5%; width: 400px; height: 400px; animation-duration: 25s;" viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/> <!-- Student/Person Icon -->
+    </svg>
 
     <div class="progress-dot-container" id="v-dots"></div>
 
@@ -215,174 +252,96 @@
         <!-- SLIDE 1: INTRO -->
         <div class="slide-container active" data-index="0">
             <div class="card justify-center items-center text-center">
-                <p class="text-teal-400 font-bold tracking-[0.4em] uppercase mb-4 text-xs animate-reveal">Strategic Digital Roadmap</p>
-                <h1 class="text-8xl font-black mb-4 title-font animate-reveal delay-1">
-                    SEO MASTER STRATEGY
+                <p class="text-yellow-500 font-black tracking-[0.8em] uppercase mb-8 text-[10px] animate-reveal">System Initialization: SEO Architecture</p>
+                <h1 class="text-9xl font-black mb-6 title-font animate-reveal delay-1 shimmer-text">
+                    SEO MASTER
                 </h1>
-                <div class="glow-line animate-reveal delay-2"></div>
-                <p class="text-2xl text-slate-400 font-light animate-reveal delay-2">LPU PGs Project Hub: The Path to Market Dominance</p>
+                <div class="h-1 w-32 bg-yellow-500 animate-reveal delay-2 mb-10"></div>
+                <p class="text-2xl text-slate-500 font-light animate-reveal delay-2 tracking-tight">Lovely Professional University | Project Hub Dominance</p>
                 
-                <div class="flex gap-12 text-left mt-16 border-t border-white/5 pt-10 w-full max-w-2xl animate-reveal delay-3">
+                <div class="flex gap-20 text-left mt-20 border-t border-white/5 pt-12 w-full max-w-2xl animate-reveal delay-3">
                     <div>
-                        <p class="text-[10px] text-teal-500 uppercase font-black tracking-widest mb-2">Academic Code</p>
-                        <p class="text-lg font-bold">MKT 905 - SEO</p>
+                        <p class="text-[9px] text-yellow-600 uppercase font-black tracking-widest mb-2">Module</p>
+                        <p class="text-xl font-bold text-white">MKT 905</p>
                     </div>
                     <div class="ml-auto text-right">
-                        <p class="text-[10px] text-teal-500 uppercase font-black tracking-widest mb-2">Lead Strategist</p>
-                        <p class="text-lg font-bold text-amber-500">Garvita Goswami</p>
+                        <p class="text-[9px] text-yellow-600 uppercase font-black tracking-widest mb-2">Strategist</p>
+                        <p class="text-xl font-bold text-yellow-500">GARVITA GOSWAMI</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 2: CHAPTER 1: THE CHALLENGE -->
+        <!-- SLIDE 2: CHAPTER 1 -->
         <div class="slide-container" data-index="1">
             <div class="card">
-                <span class="rubric-badge animate-reveal">Excellent Methodology</span>
-                <h2 class="text-5xl font-black title-font mb-8 animate-reveal delay-1">Chapter 1: The Challenge</h2>
-                <div class="grid grid-cols-2 gap-12 items-center">
+                <span class="rubric-badge animate-reveal">Phase 01 // Problem</span>
+                <h2 class="text-7xl font-black title-font mb-12 animate-reveal delay-1">THE CHALLENGE</h2>
+                <div class="grid grid-cols-2 gap-20 items-center">
                     <div class="animate-reveal delay-2">
-                        <p class="text-slate-300 mb-8 text-lg leading-relaxed font-light">
-                            How does a student housing platform break through the noise of a saturated market like Lovely Professional University?
+                        <p class="text-slate-400 mb-12 text-xl leading-relaxed font-light border-l-4 border-yellow-500 pl-8">
+                            In a hyper-saturated market like Phagwara/LPU, standard SEO is invisible. We needed structural disruption.
                         </p>
-                        <div class="space-y-6">
-                            <div class="flex items-center">
-                                <span class="w-10 h-10 rounded-2xl bg-teal-500/10 flex items-center justify-center text-teal-400 font-bold mr-4">01</span>
-                                <p class="text-sm text-slate-400">Mapping regional search roadblocks & crawl friction.</p>
+                        <div class="space-y-10">
+                            <div class="flex items-start">
+                                <span class="text-yellow-500 font-black text-3xl mr-8 mt-1">01</span>
+                                <p class="text-base text-slate-500 font-medium">Removing technical friction from regional network roadblocks.</p>
                             </div>
-                            <div class="flex items-center">
-                                <span class="w-10 h-10 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-400 font-bold mr-4">02</span>
-                                <p class="text-sm text-slate-400">Uncovering the user's hidden "Urgency" search intent.</p>
+                            <div class="flex items-start">
+                                <span class="text-yellow-500 font-black text-3xl mr-8 mt-1">02</span>
+                                <p class="text-base text-slate-500 font-medium">Capturing the "Emergency Booking" student intent funnel.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="evidence-placeholder animate-reveal delay-3">
-                        <p class="text-[10px] font-black uppercase mb-3 tracking-widest">Initial Site Health Audit</p>
-                        <p class="text-[9px] opacity-60">Placeholder: audit-health-screenshot</p>
+                    <div class="evidence-box animate-reveal delay-3">
+                        <img src="audit-health-screenshot.jpg" alt="Health Audit" class="evidence-img">
+                        <div class="evidence-caption">System Health Diagnostic</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 3: CHAPTER 2: THE COMPASS -->
+        <!-- SLIDE 3: CHAPTER 2 -->
         <div class="slide-container" data-index="2">
             <div class="card">
-                <span class="rubric-badge animate-reveal">High-Intent Selection</span>
-                <h2 class="text-5xl font-black title-font mb-8 animate-reveal delay-1">Chapter 2: The Compass</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <span class="rubric-badge animate-reveal">Phase 02 // Targeting</span>
+                <h2 class="text-7xl font-black title-font mb-12 animate-reveal delay-1">THE COMPASS</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
                     <div class="animate-reveal delay-2">
-                        <p class="text-sm text-slate-400 mb-8 leading-relaxed">Navigating the LPU search ecosystem requires laser-focused keyword precision.</p>
+                        <p class="text-base text-slate-500 mb-10 leading-relaxed italic">Synthesizing high-velocity student search patterns.</p>
                         <table>
-                            <tr><td>fast pg booking online</td><td>High Volume Transactional</td></tr>
-                            <tr><td>PG near LPU Law Gate</td><td>Local Proximity Query</td></tr>
-                            <tr><td>LPU PG reviews 2026</td><td>Topical Trust Signal</td></tr>
+                            <tr><td>fast pg booking online</td><td>Conversion Pillar</td></tr>
+                            <tr><td>PG near LPU Law Gate</td><td>Proximity Anchor</td></tr>
+                            <tr><td>LPU PG reviews 2026</td><td>Trust Multiplier</td></tr>
                         </table>
                     </div>
-                    <div class="evidence-placeholder animate-reveal delay-3">
-                        <p class="text-[10px] font-black uppercase mb-3 tracking-widest">Market Search Data Proof</p>
-                        <p class="text-[9px] opacity-60">Placeholder: keyword-research-screenshot</p>
+                    <div class="evidence-box animate-reveal delay-3">
+                        <img src="meta-setup-screenshot.jpg" alt="Keyword Targeting" class="evidence-img">
+                        <div class="evidence-caption">Intent Vector Mapping</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 4: CHAPTER 3: THE FOUNDATION -->
+        <!-- SLIDE 4: CHAPTER 3 -->
         <div class="slide-container" data-index="3">
             <div class="card">
-                <span class="rubric-badge animate-reveal">Silo Architecture</span>
-                <h2 class="text-5xl font-black title-font mb-8 animate-reveal delay-1">Chapter 3: The Foundation</h2>
-                <div class="grid grid-cols-2 gap-12 h-full">
-                    <div class="evidence-placeholder h-full animate-reveal delay-2">
-                        <p class="text-[10px] font-black uppercase mb-3 tracking-widest">On-Page Meta Injection</p>
-                        <p class="text-[9px] opacity-60 italic">Evidence: Screenshot 3.27.44 AM</p>
-                        <p class="text-[9px] opacity-60 mt-1">Placeholder: meta-setup-screenshot</p>
+                <span class="rubric-badge animate-reveal">Phase 03 // Structure</span>
+                <h2 class="text-7xl font-black title-font mb-12 animate-reveal delay-1">THE FOUNDATION</h2>
+                <div class="grid grid-cols-2 gap-20 h-full">
+                    <div class="evidence-box h-full animate-reveal delay-2">
+                        <img src="meta-setup-screenshot.jpg" alt="Meta Injection" class="evidence-img">
+                        <div class="evidence-caption">Automated Meta-Data Injection Engine</div>
                     </div>
                     <div class="flex flex-col justify-center animate-reveal delay-3">
-                        <h3 class="text-teal-400 font-black text-xs uppercase tracking-widest mb-6">Internal Siloing Strategy</h3>
-                        <p class="text-sm text-slate-300 leading-relaxed font-light mb-8">
-                            Implementing a Silo architecture (Hub -> Cluster -> Detail) to ensure maximum "Link Juice" distributes to every high-value PG listing.
+                        <h3 class="text-yellow-500 font-black text-xs uppercase tracking-[0.4em] mb-10">Silo Architecture Deployment</h3>
+                        <p class="text-lg text-slate-400 leading-relaxed font-light mb-12">
+                            Deployment of a hierarchical internal link structure to distribute authority across every sub-directory listing.
                         </p>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="px-4 py-2 bg-teal-500/10 border border-teal-500/20 rounded-xl text-[10px] font-bold">H1/H2 Hierarchy</span>
-                            <span class="px-4 py-2 bg-amber-500/10 border border-amber-500/20 rounded-xl text-[10px] font-bold">Canonical Logic</span>
+                        <div class="flex flex-wrap gap-6">
+                            <span class="px-8 py-4 bg-yellow-500 text-black text-xs font-black uppercase tracking-widest">H1/H3 Logic</span>
+                            <span class="px-8 py-4 border border-yellow-500 text-yellow-500 text-xs font-black uppercase tracking-widest">Canonical Lock</span>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 5: CHAPTER 4: THE GROWTH -->
-        <div class="slide-container" data-index="4">
-            <div class="card">
-                <span class="rubric-badge animate-reveal">White-Hat Strategy</span>
-                <h2 class="text-5xl font-black title-font mb-8 animate-reveal delay-1">Chapter 4: The Growth</h2>
-                <div class="grid grid-cols-3 gap-8 mb-12 animate-reveal delay-2">
-                    <div class="p-6 bg-teal-500/5 border border-teal-500/20 rounded-3xl text-center hover:bg-teal-500/10 transition-colors">
-                        <p class="text-lg font-bold mb-1 title-font italic">.edu</p>
-                        <p class="text-[10px] text-teal-400 uppercase font-black tracking-widest">Academic Outreach</p>
-                    </div>
-                    <div class="p-6 bg-amber-500/5 border border-amber-500/20 rounded-3xl text-center hover:bg-amber-500/10 transition-colors">
-                        <p class="text-lg font-bold mb-1 title-font italic">Signals</p>
-                        <p class="text-[10px] text-amber-400 uppercase font-black tracking-widest">Social Integration</p>
-                    </div>
-                    <div class="p-6 bg-rose-500/5 border border-rose-500/20 rounded-3xl text-center hover:bg-rose-500/10 transition-colors">
-                        <p class="text-lg font-bold mb-1 title-font italic">Authority</p>
-                        <p class="text-[10px] text-rose-400 uppercase font-black tracking-widest">Manual Link Audit</p>
-                    </div>
-                </div>
-                <div class="evidence-placeholder min-h-[160px] animate-reveal delay-3">
-                    <p class="text-[10px] font-black uppercase mb-3 tracking-widest">Off-Page Authority Proof</p>
-                    <p class="text-[9px] opacity-60">Placeholder: social-footer-screenshot</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 6: CHAPTER 5: CLEARING THE PATH -->
-        <div class="slide-container" data-index="5">
-            <div class="card">
-                <span class="rubric-badge animate-reveal">Technical Mastery</span>
-                <h2 class="text-5xl font-black title-font mb-8 animate-reveal delay-1">Chapter 5: Clearing the Path</h2>
-                <div class="grid grid-cols-2 gap-12">
-                    <div class="animate-reveal delay-2">
-                        <p class="text-xs text-teal-400 mb-8 font-black uppercase tracking-widest">Technical Roadblock Resolution:</p>
-                        <div class="space-y-6">
-                            <div class="p-4 bg-rose-500/5 rounded-2xl border border-rose-500/10">
-                                <p class="text-rose-400 font-bold text-sm mb-1">Wix JS Friction</p>
-                                <p class="text-[11px] text-slate-500">Optimized via SSR snapshotting for bot crawling.</p>
-                            </div>
-                            <div class="p-4 bg-teal-500/5 rounded-2xl border border-teal-500/10">
-                                <p class="text-teal-400 font-bold text-sm mb-1">Structured Data</p>
-                                <p class="text-[11px] text-slate-500">Injecting LocalBusiness & Review Schema.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="evidence-placeholder h-full animate-reveal delay-3">
-                        <p class="text-[10px] font-black uppercase mb-3 tracking-widest">Technical Completion Evidence</p>
-                        <p class="text-[9px] opacity-60 italic">Evidence: Screenshot 1.16.33 AM</p>
-                        <p class="text-[9px] opacity-60 mt-1">Placeholder: wix-checklist-screenshot</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SLIDE 7: CHAPTER 6: THE HORIZON -->
-        <div class="slide-container" data-index="6">
-            <div class="card">
-                <span class="rubric-badge animate-reveal">Mobile Excellence</span>
-                <h2 class="text-5xl font-black title-font mb-8 animate-reveal delay-1">Chapter 6: The Horizon</h2>
-                <div class="grid grid-cols-2 gap-12">
-                    <div class="animate-reveal delay-2">
-                        <p class="text-lg text-slate-300 mb-8 leading-relaxed font-light">
-                            Student-centric UI. Optimizing the mobile "Fast Booking" flow for visual depth and conversion speed.
-                        </p>
-                        <div class="evidence-placeholder h-48">
-                            <p class="text-[10px] font-black uppercase mb-2 tracking-widest">Mobile Speed Insights</p>
-                            <p class="text-[9px] opacity-60">Placeholder: pagespeed-insights-screenshot</p>
-                        </div>
-                    </div>
-                    <div class="evidence-placeholder h-full animate-reveal delay-3">
-                        <p class="text-[10px] font-black uppercase mb-2 tracking-widest">Mobile UI Architecture</p>
-                        <p class="text-[9px] opacity-60">Placeholder: mobile-viewport-screenshot</p>
                     </div>
                 </div>
             </div>
@@ -391,17 +350,18 @@
         <!-- SLIDE 8: THANK YOU -->
         <div class="slide-container" data-index="7">
             <div class="card justify-center items-center text-center">
-                <h2 class="text-8xl font-black mb-8 title-font bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-amber-500 uppercase animate-reveal">
-                    Thank You
+                <h2 class="text-9xl font-black mb-12 title-font shimmer-text animate-reveal">
+                    MISSION COMPLETE
                 </h2>
-                <div class="glow-line animate-reveal delay-1" style="width: 120px;"></div>
-                <p class="text-2xl text-slate-400 mb-16 font-light animate-reveal delay-2 italic">Building the future of student housing search, one click at a time.</p>
+                <div class="h-1 w-64 bg-yellow-500 animate-reveal delay-1 mb-12"></div>
+                <p class="text-2xl text-slate-500 mb-20 font-light animate-reveal delay-2 tracking-widest uppercase">Data-Driven Domination Secured.</p>
                 
-                <div class="w-full max-w-lg space-y-4 animate-reveal delay-3">
-                    <div class="p-6 bg-white/5 rounded-3xl border border-white/5 text-center">
-                        <p class="text-[10px] text-teal-500 uppercase font-black tracking-widest mb-2">Developed By</p>
-                        <p class="text-xl font-bold text-white">Garvita Goswami</p>
-                        <p class="text-[10px] text-slate-500 mt-1 uppercase tracking-widest">LPU Project Hub | SEO Strategist</p>
+                <div class="w-full max-w-xl space-y-8 animate-reveal delay-3">
+                    <div class="p-12 bg-white/5 border border-yellow-500/20 text-center relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-yellow-500 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                        <p class="text-[9px] text-yellow-500 uppercase font-black tracking-[0.5em] mb-6">Principal Architect</p>
+                        <p class="text-4xl font-black text-white mb-4">GARVITA GOSWAMY</p>
+                        <p class="text-xs text-slate-600 uppercase tracking-[0.3em]">SEO Strategy // LPU Project Hub</p>
                     </div>
                 </div>
             </div>
@@ -409,10 +369,10 @@
 
     </div>
 
-    <!-- Navigation Overlay -->
-    <div class="fixed bottom-12 left-0 right-0 flex justify-center gap-6 z-[200]">
-        <button onclick="prevSlide()" class="nav-btn">Previous</button>
-        <button onclick="nextSlide()" class="nav-btn bg-teal-600 border-teal-500 text-bg shadow-xl">Next Chapter</button>
+    <!-- Navigation -->
+    <div class="fixed bottom-12 left-0 right-0 flex justify-center gap-12 z-[200]">
+        <button onclick="prevSlide()" class="nav-btn">[[ PREV ]]</button>
+        <button onclick="nextSlide()" class="nav-btn bg-yellow-500 text-black border-yellow-500">[[ NEXT CHAPTER ]]</button>
     </div>
 
     <script>
@@ -420,14 +380,19 @@
         const slides = document.querySelectorAll('.slide-container');
         const vDotsContainer = document.getElementById('v-dots');
 
-        // Create dots
         slides.forEach((_, i) => {
             const dot = document.createElement('div');
             dot.className = 'v-dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => goToSlide(i);
             vDotsContainer.appendChild(dot);
         });
 
         const dots = document.querySelectorAll('.v-dot');
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlides();
+        }
 
         function updateSlides() {
             slides.forEach((slide, i) => {
@@ -460,13 +425,11 @@
             }
         }
 
-        // Key support
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') nextSlide();
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
             if (e.key === 'ArrowLeft') prevSlide();
         });
 
-        // Initialize positions
         updateSlides();
     </script>
 </body>
