@@ -3,35 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MKT 905: SEO Master Strategy</title>
+    <title>SEO Strategy: LPU PGs | Garvita Goswami</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         
         :root {
-            --apple-bg: #f5f5f7;
-            --apple-card: #ffffff;
-            --apple-text: #1d1d1f;
-            --apple-accent: #0071e3; /* Apple Blue for Light Mode */
-            --apple-subtext: #86868b;
+            --apple-bg: #F5F5F7;
+            --apple-card: rgba(255, 255, 255, 0.8);
+            --apple-blue: #007AFF;
+            --apple-purple: #AF52DE;
+            --apple-gray: #86868B;
+            --apple-text: #1D1D1F;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--apple-bg);
             color: var(--apple-text);
             margin: 0;
             overflow: hidden;
-            -webkit-font-smoothing: antialiased;
         }
 
-        /* Apple-esque 3D Slider */
-        .slider-wrapper {
-            width: 100vw;
+        .slide-wrapper {
             height: 100vh;
+            width: 100vw;
             display: flex;
-            transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.8, 0, 0.2, 1);
         }
 
         .slide {
@@ -40,44 +39,37 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 5vw;
+            padding: 40px;
             box-sizing: border-box;
-            transition: opacity 1s ease, transform 1s ease;
             opacity: 0.1;
-            transform: scale(0.9) translateZ(-200px);
+            transition: opacity 0.5s ease;
         }
 
         .slide.active {
             opacity: 1;
-            transform: scale(1) translateZ(0);
         }
 
         .apple-card {
             background: var(--apple-card);
-            border-radius: 32px;
-            padding: 4rem;
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 36px;
+            padding: 60px;
             width: 100%;
-            max-width: 1200px;
-            height: 85vh;
-            max-height: 800px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.06);
+            max-width: 1100px;
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
             position: relative;
-            overflow-y: auto;
-            scrollbar-width: none;
-            border: 1px solid rgba(0,0,0,0.03);
         }
-        .apple-card::-webkit-scrollbar { display: none; }
-
-        .full-slide { grid-template-columns: 1fr; text-align: center; }
 
         /* Animation Classes */
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.2, 1, 0.2, 1);
         }
 
         .active .reveal {
@@ -85,360 +77,710 @@
             transform: translateY(0);
         }
 
-        .delay-1 { transition-delay: 0.2s; }
-        .delay-2 { transition-delay: 0.4s; }
-        .delay-3 { transition-delay: 0.6s; }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
 
-        .tagline {
-            color: var(--apple-accent);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-size: 0.75rem;
-            margin-bottom: 1rem;
-            display: block;
+        /* Custom UI Elements */
+        .glass-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
         }
-
-        .headline {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-            color: #000000;
+        .glass-table td, .glass-table th {
+            padding: 15px;
+            background: rgba(0,0,0,0.03);
+            border: none;
         }
+        .glass-table th { color: var(--apple-gray); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        .glass-table tr td:first-child { border-radius: 12px 0 0 12px; font-weight: 600; }
+        .glass-table tr td:last-child { border-radius: 0 12px 12px 0; }
 
-        .description {
-            color: var(--apple-subtext);
-            font-size: 1.25rem;
-            line-height: 1.5;
-            font-weight: 400;
-        }
-
-        /* Nav Controls */
-        .nav-dock {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: saturate(180%) blur(20px);
-            padding: 0.75rem 1.5rem;
-            border-radius: 99px;
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            border: 1px solid rgba(0,0,0,0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            z-index: 1000;
-        }
-
-        .nav-arrow {
-            color: var(--apple-text);
-            opacity: 0.8;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .nav-arrow:hover { transform: scale(1.2); opacity: 1; }
-        .nav-arrow:disabled { opacity: 0.2; cursor: default; }
-
-        .dot-nav { display: flex; gap: 8px; }
-        .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(0,0,0,0.1); transition: all 0.3s; cursor: pointer; }
-        .dot.active { background: var(--apple-text); transform: scale(1.5); }
-
-        /* UI Elements */
-        .pill {
-            background: #f2f2f7;
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 1rem;
-            color: var(--apple-text);
-        }
-
-        .evidence-frame {
-            background: #fdfdfd;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.08);
+        .placeholder-box {
+            border: 2px dashed rgba(0,0,0,0.1);
+            background: rgba(0,0,0,0.02);
+            border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            text-align: center;
+            flex-grow: 1;
+            margin-top: 20px;
+            color: var(--apple-gray);
+            position: relative;
+            overflow: hidden;
         }
 
-        .img-fit { width: 100%; height: 100%; object-fit: cover; }
+        .placeholder-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+        }
+
+        .nav-dock {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            padding: 10px 20px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .dock-btn {
+            background: none;
+            border: none;
+            color: var(--apple-text);
+            padding: 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .dock-btn:hover:not(:disabled) {
+            background: rgba(0,0,0,0.05);
+            transform: scale(1.1);
+        }
         
-        .list-item { border-bottom: 1px solid rgba(0,0,0,0.05); padding: 1rem 0; }
-        .list-title { color: var(--apple-text); font-weight: 600; margin-bottom: 0.25rem; }
-        .list-desc { color: var(--apple-subtext); font-size: 0.9rem; }
+        .dock-btn:disabled { opacity: 0.3; }
 
-        .bg-gradient-soft {
-            background: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
+        .progress-indicator {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--apple-gray);
+            min-width: 60px;
+            text-align: center;
         }
+
+        .highlight-blue { color: var(--apple-blue); }
+        .highlight-purple { color: var(--apple-purple); }
 
     </style>
 </head>
-<body class="bg-gradient-soft">
+<body>
 
-    <div class="slider-wrapper" id="slider">
+    <div class="slide-wrapper" id="slideWrapper">
         
-        <!-- INTRO -->
+        <!-- SLIDE 1: Title -->
         <div class="slide active">
-            <div class="apple-card full-slide">
-                <div class="flex flex-col items-center justify-center">
-                    <span class="tagline reveal">Academic Task 1: MKT 905</span>
-                    <h1 class="headline reveal delay-1" style="font-size: 5.5rem;">SEO Master Strategy.<br><span style="color: var(--apple-subtext);">LPU PGs Project.</span></h1>
-                    <p class="description reveal delay-2 max-w-2xl mx-auto">A comprehensive digital dominance plan focusing on Keyword Research, Technical Excellence, and Mobile Optimization.</p>
-                    <div class="mt-12 flex gap-8 reveal delay-3">
-                        <div class="text-left">
-                            <p class="text-[10px] text-blue-600 font-bold uppercase tracking-widest">Instructor</p>
-                            <p class="text-xl font-medium">Dr. Atul Sharma</p>
-                        </div>
-                        <div class="w-px h-12 bg-black/5"></div>
-                        <div class="text-left">
-                            <p class="text-[10px] text-blue-600 font-bold uppercase tracking-widest">Strategist</p>
-                            <p class="text-xl font-medium">Garvita Goswami</p>
-                        </div>
+            <div class="apple-card items-center justify-center text-center">
+                <div class="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center mb-8 shadow-xl reveal">
+                    <i data-lucide="search" class="text-white w-10 h-10"></i>
+                </div>
+                <h1 class="text-6xl font-black mb-4 reveal delay-1">SEO Strategy for Student Accommodation</h1>
+                <p class="text-2xl text-gray-500 font-medium mb-12 reveal delay-2">Wix-Based Platform Development</p>
+                
+                <div class="grid grid-cols-3 gap-8 w-full max-w-3xl mt-12 border-t border-black/5 pt-12 reveal delay-3">
+                    <div class="text-left">
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Presenter</p>
+                        <p class="text-lg font-semibold">Garvita Goswami</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Course</p>
+                        <p class="text-lg font-semibold">MKT 905</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Instructor</p>
+                        <p class="text-lg font-semibold">Dr. Atul Sharma</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- KEYWORD RESEARCH -->
+        <!-- SLIDE 2: Problem -->
         <div class="slide">
             <div class="apple-card">
-                <div class="flex flex-col justify-center">
-                    <span class="tagline">Phase 01: Keyword Research</span>
-                    <h2 class="headline">The Data-Driven<br>Discovery.</h2>
-                    <div class="space-y-4 reveal delay-1">
-                        <div class="list-item">
-                            <div class="list-title">Professional Toolkit</div>
-                            <div class="list-desc">Utilizing SEMrush for competitive gap analysis and Google Keyword Planner for localized volume.</div>
-                        </div>
-                        <div class="list-item">
-                            <div class="list-title">Intent Mapping</div>
-                            <div class="list-desc">Categorizing queries into Informational (PG guides) and Transactional (Book PG online).</div>
-                        </div>
-                        <div class="list-item">
-                            <div class="list-title">Keyword Density</div>
-                            <div class="list-desc">Maintaining 1.5% - 2% density to ensure natural flow without keyword stuffing.</div>
-                        </div>
+                <h2 class="text-4xl font-bold mb-10 reveal">Problem Statement</h2>
+                <div class="grid grid-cols-3 gap-8 flex-grow">
+                    <div class="p-8 bg-black/5 rounded-3xl reveal delay-1">
+                        <i data-lucide="shield-alert" class="text-red-500 mb-4"></i>
+                        <h3 class="font-bold mb-2">Unverified Listings</h3>
+                        <p class="text-sm text-gray-500">Students face difficulty finding verified PG accommodations.</p>
                     </div>
-                </div>
-                <div class="evidence-frame reveal delay-2">
-                    <img src="./audit-health-screenshot.jpg" class="img-fit" alt="Rank Math & Keyword Analysis">
+                    <div class="p-8 bg-black/5 rounded-3xl reveal delay-2">
+                        <i data-lucide="layers" class="text-orange-500 mb-4"></i>
+                        <h3 class="font-bold mb-2">Fragmentation</h3>
+                        <p class="text-sm text-gray-500">No centralized platform for comparison between options.</p>
+                    </div>
+                    <div class="p-8 bg-black/5 rounded-3xl reveal delay-3">
+                        <i data-lucide="clock" class="text-yellow-600 mb-4"></i>
+                        <h3 class="font-bold mb-2">Efficiency Loss</h3>
+                        <p class="text-sm text-gray-500">Time-consuming and unreliable manual search process.</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- CONTENT & LINKING -->
+        <!-- SLIDE 3: Solution -->
         <div class="slide">
             <div class="apple-card">
-                <div class="evidence-frame reveal delay-2">
-                    <img src="./meta-setup-screenshot.jpg" class="img-fit" alt="Content Optimization">
-                </div>
-                <div class="flex flex-col justify-center">
-                    <span class="tagline">Phase 02: Content & Internal Linking</span>
-                    <h2 class="headline">Value-First<br>Architecture.</h2>
-                    <p class="description mb-8">Crafting keyword-specific content that avoids duplication while providing regional value to students.</p>
-                    <div class="grid grid-cols-2 gap-4 reveal delay-1">
-                        <div class="p-4 bg-black/5 rounded-2xl">
-                            <p class="text-blue-600 font-bold text-xs mb-1">Local SEO</p>
-                            <p class="text-sm text-slate-600">Neighborhood modifiers and regional landmarks.</p>
-                        </div>
-                        <div class="p-4 bg-black/5 rounded-2xl">
-                            <p class="text-blue-600 font-bold text-xs mb-1">Internal Linking</p>
-                            <p class="text-sm text-slate-600">Silo structure connecting blogs to booking pages.</p>
-                        </div>
+                <h2 class="text-4xl font-bold mb-10 reveal">Proposed Solution</h2>
+                <div class="flex flex-col gap-6 flex-grow">
+                    <div class="flex items-center gap-6 p-6 bg-blue-50 border border-blue-100 rounded-3xl reveal delay-1">
+                        <div class="w-12 h-12 rounded-full bg-blue-600 flex items-center justify-center text-white shrink-0">1</div>
+                        <p class="text-xl">Developed a Wix-based platform for PG listings near LPU.</p>
+                    </div>
+                    <div class="flex items-center gap-6 p-6 bg-purple-50 border border-purple-100 rounded-3xl reveal delay-2">
+                        <div class="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center text-white shrink-0">2</div>
+                        <p class="text-xl">Provides verified listings and easy comparison tools.</p>
+                    </div>
+                    <div class="flex items-center gap-6 p-6 bg-teal-50 border border-teal-100 rounded-3xl reveal delay-3">
+                        <div class="w-12 h-12 rounded-full bg-teal-600 flex items-center justify-center text-white shrink-0">3</div>
+                        <p class="text-xl">Simplifies search and direct contact process.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- OFF-PAGE -->
+        <!-- SLIDE 4: Website Overview -->
         <div class="slide">
             <div class="apple-card">
-                <div class="flex flex-col justify-center">
-                    <span class="tagline">Phase 03: Off-Page Optimization</span>
-                    <h2 class="headline">Building Digital<br>Authority.</h2>
-                    <div class="space-y-6 reveal delay-1">
-                        <div class="pill">White-Hat Linking Strategies</div>
-                        <p class="description">Focusing on high-quality inbound links from reputable educational portals and student forums to ensure credibility.</p>
-                        <div class="flex gap-4">
-                            <div class="w-12 h-12 bg-black/5 rounded-full flex items-center justify-center">
-                                <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-sm font-semibold">Social Signal Integration</p>
-                                <p class="text-xs text-slate-500">Connecting FB, Insta, and LinkedIn via footer triggers.</p>
-                            </div>
+                <h2 class="text-4xl font-bold mb-6 reveal">Website Overview</h2>
+                <p class="text-gray-500 mb-8 reveal delay-1">Helping users find PGs near LPU with high-trust visuals.</p>
+                <div class="grid grid-cols-2 gap-8 flex-grow">
+                    <div class="flex flex-col gap-4 reveal delay-2">
+                        <div class="p-4 bg-black/5 rounded-2xl flex items-center gap-4">
+                            <i data-lucide="check-circle" class="text-green-600 w-5 h-5"></i>
+                            <span>PG Listings</span>
+                        </div>
+                        <div class="p-4 bg-black/5 rounded-2xl flex items-center gap-4">
+                            <i data-lucide="message-circle" class="text-blue-600 w-5 h-5"></i>
+                            <span>Contact via WhatsApp</span>
+                        </div>
+                        <div class="p-4 bg-black/5 rounded-2xl flex items-center gap-4">
+                            <i data-lucide="mouse-pointer-2" class="text-purple-600 w-5 h-5"></i>
+                            <span>Easy Browsing</span>
                         </div>
                     </div>
-                </div>
-                <div class="evidence-frame reveal delay-2">
-                    <img src="./social-footer-screenshot.jpg" class="img-fit" alt="Social Media & Backlinks">
-                </div>
-            </div>
-        </div>
-
-        <!-- TECHNICAL SEO -->
-        <div class="slide">
-            <div class="apple-card full-slide">
-                <div class="max-w-4xl mx-auto">
-                    <span class="tagline">Phase 04: Technical SEO</span>
-                    <h2 class="headline">The Engineering of Search.</h2>
-                    <p class="description mb-12">Optimizing your website infrastructure to help search engines crawl, interpret, and index your pages with peak efficiency.</p>
-                    
-                    <div class="grid grid-cols-4 gap-6 reveal delay-1">
-                        <div class="p-6 bg-black/5 rounded-3xl border border-black/5 text-left">
-                            <p class="text-blue-600 font-black text-xs uppercase mb-4">Indexing</p>
-                            <p class="text-xs text-slate-500">Ensuring search bots discover content via sitemaps and robots.txt.</p>
-                        </div>
-                        <div class="p-6 bg-black/5 rounded-3xl border border-black/5 text-left">
-                            <p class="text-blue-600 font-black text-xs uppercase mb-4">Site Speed</p>
-                            <p class="text-xs text-slate-500">Optimizing LCP and CLS scores for immediate content delivery.</p>
-                        </div>
-                        <div class="p-6 bg-black/5 rounded-3xl border border-black/5 text-left">
-                            <p class="text-blue-600 font-black text-xs uppercase mb-4">Mobile Ready</p>
-                            <p class="text-xs text-slate-500">Adaptive layouts that pass Google's Mobile-Friendly Test (UX).</p>
-                        </div>
-                        <div class="p-6 bg-black/5 rounded-3xl border border-black/5 text-left">
-                            <p class="text-blue-600 font-black text-xs uppercase mb-4">Server Health</p>
-                            <p class="text-xs text-slate-500">SSL encryption, HTTP/2, and 301/404 redirect logic.</p>
-                        </div>
-                    </div>
-                    <div class="mt-12 flex justify-center reveal delay-3">
-                         <div class="evidence-frame max-w-xl">
-                            <img src="./wix-checklist-screenshot.jpg" class="img-fit" alt="Technical Checklist">
-                        </div>
+                    <div class="placeholder-box reveal delay-3">
+                        <img src="Screenshot 2026-03-27 at 1.16.37 AM.jpg" alt="Website Overview">
+                        <p class="absolute bottom-4 text-[10px] font-bold">Actual Website Screenshot</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- ANALYTICS -->
+        <!-- SLIDE 5: Architecture -->
         <div class="slide">
             <div class="apple-card">
-                <div class="flex flex-col justify-center">
-                    <span class="tagline">Phase 05: Analytics & Conversion</span>
-                    <h2 class="headline">Measurable<br>Intelligence.</h2>
-                    <div class="space-y-4 reveal delay-1">
-                        <div class="list-item">
-                            <div class="list-title">GA4 & Search Console</div>
-                            <div class="list-desc">Tracking event-based triggers (clicks, scrolls) to understand user flow and drop-off points.</div>
-                        </div>
-                        <div class="list-item">
-                            <div class="list-title">Conversion Rate Optimization (CRO)</div>
-                            <div class="list-desc">Applying A/B testing on 'Book Now' buttons to maximize booking intent.</div>
-                        </div>
+                <h2 class="text-4xl font-bold mb-10 reveal">Website Architecture</h2>
+                <div class="flex flex-col items-center flex-grow py-10 reveal delay-1">
+                    <div class="p-4 bg-blue-600 text-white rounded-xl px-10 font-bold mb-4 shadow-lg">Home</div>
+                    <div class="w-px h-8 bg-gray-300 mb-4"></div>
+                    <div class="grid grid-cols-4 gap-4 w-full">
+                        <div class="p-3 bg-black/5 border border-black/5 rounded-lg text-center text-xs font-semibold">PG Listings</div>
+                        <div class="p-3 bg-black/5 border border-black/5 rounded-lg text-center text-xs font-semibold">Book Online</div>
+                        <div class="p-3 bg-black/5 border border-black/5 rounded-lg text-center text-xs font-semibold">Contact</div>
+                        <div class="p-3 bg-black/5 border border-black/5 rounded-lg text-center text-xs font-semibold">Social Links</div>
                     </div>
                 </div>
-                <div class="evidence-frame reveal delay-2">
-                    <img src="./pagespeed-insights-screenshot.jpg" class="img-fit" alt="Site Analytics Data">
+                <div class="p-6 bg-black/5 rounded-2xl reveal delay-2">
+                    <p class="text-gray-500 text-sm italic">"Simple and SEO-friendly structure. Easy navigation improves User Experience (UX)."</p>
                 </div>
             </div>
         </div>
 
-        <!-- DESIGN & MOBILE -->
+        <!-- SLIDE 6: Journey -->
         <div class="slide">
             <div class="apple-card">
-                <div class="evidence-frame reveal delay-2">
-                    <img src="./mobile-viewport-screenshot.jpg" class="img-fit" alt="Mobile Optimization">
+                <h2 class="text-4xl font-bold mb-10 reveal">User Journey</h2>
+                <div class="grid grid-cols-4 gap-4 flex-grow items-center">
+                    <div class="text-center reveal delay-1">
+                        <div class="w-12 h-12 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4 font-bold">1</div>
+                        <p class="text-xs">User searches<br>“PG near LPU”</p>
+                    </div>
+                    <div class="text-center reveal delay-2">
+                        <div class="w-12 h-12 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4 font-bold">2</div>
+                        <p class="text-xs">Lands on<br>homepage</p>
+                    </div>
+                    <div class="text-center reveal delay-3">
+                        <div class="w-12 h-12 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4 font-bold">3</div>
+                        <p class="text-xs">Clicks<br>“Browse Listings”</p>
+                    </div>
+                    <div class="text-center reveal delay-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 text-white"><i data-lucide="whatsapp" class="w-6 h-6"></i></div>
+                        <p class="text-xs font-bold">Contacts via<br>WhatsApp</p>
+                    </div>
                 </div>
-                <div class="flex flex-col justify-center">
-                    <span class="tagline">Phase 06: Web Design & Mobile</span>
-                    <h2 class="headline">Design for<br>Discovery.</h2>
-                    <p class="description mb-8">A mobile-first philosophy ensuring that the vast majority of student traffic has a seamless browsing experience.</p>
-                    <div class="space-y-4 reveal delay-1">
-                        <div class="flex items-center gap-3">
-                            <div class="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
-                            <p class="text-sm">SEO-Friendly Information Architecture</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: Tools -->
+        <div class="slide">
+            <div class="apple-card">
+                <p class="text-blue-600 font-bold tracking-widest text-xs uppercase mb-2 reveal">Section: Keyword Strategy</p>
+                <h2 class="text-4xl font-bold mb-10 reveal delay-1">Research Tools</h2>
+                <div class="grid grid-cols-2 gap-8 flex-grow">
+                    <div class="p-10 bg-black/5 rounded-[40px] flex flex-col items-center justify-center reveal delay-2">
+                        <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" class="h-8 mb-6" alt="Google">
+                        <p class="font-bold">Google Keyword Planner</p>
+                    </div>
+                    <div class="p-10 bg-black/5 rounded-[40px] flex flex-col items-center justify-center reveal delay-3">
+                        <p class="text-3xl font-black text-orange-600 mb-6 italic">SEMrush</p>
+                        <p class="font-bold">Used for Volume & Trends</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: Primary Keywords -->
+        <div class="slide">
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-8 reveal">Primary Keywords</h2>
+                <div class="overflow-hidden reveal delay-1">
+                    <table class="glass-table">
+                        <thead>
+                            <tr><th>Keyword</th><th>Volume</th><th>KD%</th><th>CPC</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>PG near me</td><td>40.5K</td><td>78%</td><td>₹18</td></tr>
+                            <tr><td>hostel near me</td><td>60.5K</td><td>82%</td><td>₹15</td></tr>
+                            <tr><td>student accommodation</td><td>22.2K</td><td>65%</td><td>₹25</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: Long-Tail -->
+        <div class="slide">
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-8 reveal">Long-Tail Keywords</h2>
+                <div class="overflow-hidden reveal delay-1">
+                    <table class="glass-table">
+                        <thead>
+                            <tr><th>Keyword</th><th>Volume</th><th>KD%</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>PG near LPU</td><td>1.2K</td><td class="text-green-600 font-bold">30%</td></tr>
+                            <tr><td>affordable PG near LPU</td><td>1.3K</td><td class="text-green-600 font-bold">32%</td></tr>
+                            <tr><td>best PG for students near LPU</td><td>900</td><td class="text-green-600 font-bold">28%</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-auto p-4 bg-green-50 text-green-700 border border-green-100 rounded-2xl text-center font-bold reveal delay-2">
+                    👉 Focus: High conversion + Low competition
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: Mapping -->
+        <div class="slide">
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-8 reveal">Keyword Mapping</h2>
+                <div class="overflow-hidden reveal delay-1">
+                    <table class="glass-table">
+                        <thead>
+                            <tr><th>Target Page</th><th>Target Keyword</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Home</td><td>PG near LPU</td></tr>
+                            <tr><td>Listings</td><td>affordable PG near LPU</td></tr>
+                            <tr><td>Contact</td><td>book PG near me</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 11: SEMrush Dashboard -->
+        <div class="slide">
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-4 reveal">SEMrush Dashboard</h2>
+                <p class="text-gray-500 mb-6 reveal delay-1">Used SEMrush to analyze keyword difficulty & trends.</p>
+                <div class="placeholder-box flex-grow reveal delay-2">
+                    <img src="Screenshot 2026-03-27 at 1.16.49 AM.jpg" alt="SEMrush">
+                    <p class="absolute bottom-4 text-[10px] font-bold">Visual Proof: Analytics Interface</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 12: On-Page Elements -->
+        <div class="slide">
+            <div class="apple-card">
+                <p class="text-purple-600 font-bold tracking-widest text-xs uppercase mb-2 reveal">Section: On-Page SEO</p>
+                <h2 class="text-4xl font-bold mb-10 reveal delay-1">On-Page SEO Elements</h2>
+                <div class="grid grid-cols-2 gap-4 flex-grow reveal delay-2">
+                    <div class="p-6 bg-black/5 rounded-2xl flex items-center gap-6">
+                        <i data-lucide="tag" class="text-blue-600"></i>
+                        <span class="text-xl font-medium">Title Tags</span>
+                    </div>
+                    <div class="p-6 bg-black/5 rounded-2xl flex items-center gap-6">
+                        <i data-lucide="file-text" class="text-purple-600"></i>
+                        <span class="text-xl font-medium">Meta Descriptions</span>
+                    </div>
+                    <div class="p-6 bg-black/5 rounded-2xl flex items-center gap-6">
+                        <i data-lucide="heading" class="text-teal-600"></i>
+                        <span class="text-xl font-medium">Headers (H1, H2)</span>
+                    </div>
+                    <div class="p-6 bg-black/5 rounded-2xl flex items-center gap-6">
+                        <i data-lucide="image" class="text-pink-600"></i>
+                        <span class="text-xl font-medium">Image Alt Text</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 13: Optimization -->
+        <div class="slide">
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-10 reveal">Content Optimization</h2>
+                <div class="space-y-6 flex-grow">
+                    <div class="p-8 bg-blue-50 border border-blue-100 rounded-3xl reveal delay-1">
+                        <p class="text-xs uppercase text-blue-600 font-black mb-2">Headline</p>
+                        <p class="text-2xl font-bold">“Find Verified PGs Near LPU”</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-6 reveal delay-2">
+                        <div class="p-6 bg-black/5 rounded-2xl">
+                            <h3 class="font-bold mb-2">Natural Flow</h3>
+                            <p class="text-sm text-gray-500">Keywords naturally included without stuffing.</p>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
-                            <p class="text-sm">Responsive Breakpoint Logic (Apple UI standard)</p>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <div class="w-1.5 h-1.5 bg-blue-600 rounded-full"></div>
-                            <p class="text-sm">Accelerated Page Loading via WebP & Minification</p>
+                        <div class="p-6 bg-black/5 rounded-2xl">
+                            <h3 class="font-bold mb-2">Uniqueness</h3>
+                            <p class="text-sm text-gray-500">No duplicate content detected across pages.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- THANK YOU -->
+        <!-- SLIDE 14: Linking -->
         <div class="slide">
-            <div class="apple-card full-slide">
-                <div class="flex flex-col items-center justify-center">
-                    <h2 class="headline reveal" style="font-size: 6rem;">Thank you.</h2>
-                    <p class="description reveal delay-1">MKT 905 Academic Task 1 | March 2026</p>
-                    <div class="mt-16 reveal delay-2">
-                        <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mb-2">Developed by</p>
-                        <p class="text-3xl font-bold">Garvita Goswami</p>
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-10 reveal">Internal Linking Strategy</h2>
+                <div class="flex items-center justify-center gap-10 flex-grow reveal delay-1">
+                    <div class="p-10 bg-black/5 rounded-full border border-black/10 font-bold">Home</div>
+                    <i data-lucide="arrow-right" class="text-gray-400"></i>
+                    <div class="p-10 bg-black/5 rounded-full border border-black/10 font-bold">Listings</div>
+                    <i data-lucide="arrow-right" class="text-gray-400"></i>
+                    <div class="p-10 bg-black/5 rounded-full border border-black/10 font-bold">Contact</div>
+                </div>
+                <div class="p-6 bg-black/5 rounded-2xl text-center reveal delay-2">
+                    <p class="text-gray-500">Improves navigation efficiency and crawler depth.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 15: Off-Page -->
+        <div class="slide">
+            <div class="apple-card">
+                <p class="text-amber-600 font-bold tracking-widest text-xs uppercase mb-2 reveal">Section: Off-Page SEO</p>
+                <h2 class="text-4xl font-bold mb-10 reveal delay-1">Off-Page Strategy</h2>
+                <div class="grid grid-cols-2 gap-8 flex-grow">
+                    <div class="p-8 bg-black/5 rounded-3xl reveal delay-2">
+                        <i data-lucide="share-2" class="text-amber-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-4">Social Media</h3>
+                        <p class="text-gray-500">Full integration with major platforms to build brand authority.</p>
                     </div>
+                    <div class="p-8 bg-black/5 rounded-3xl reveal delay-3">
+                        <i data-lucide="link" class="text-blue-600 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-4">Backlink Strategy</h3>
+                        <p class="text-gray-500">Planned acquisition of quality links from local student blogs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 16: Social Integration -->
+        <div class="slide">
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-10 reveal">Social Media Integration</h2>
+                <div class="grid grid-cols-3 gap-6 flex-grow">
+                    <div class="p-6 bg-black/5 rounded-3xl text-center reveal delay-1">
+                        <i data-lucide="facebook" class="mx-auto mb-4 w-10 h-10 text-blue-600"></i>
+                        <p class="font-bold">Facebook</p>
+                    </div>
+                    <div class="p-6 bg-black/5 rounded-3xl text-center reveal delay-2">
+                        <i data-lucide="instagram" class="mx-auto mb-4 w-10 h-10 text-pink-600"></i>
+                        <p class="font-bold">Instagram</p>
+                    </div>
+                    <div class="p-6 bg-black/5 rounded-3xl text-center reveal delay-3">
+                        <i data-lucide="youtube" class="mx-auto mb-4 w-10 h-10 text-red-600"></i>
+                        <p class="font-bold">YouTube</p>
+                    </div>
+                </div>
+                <div class="placeholder-box mt-6 reveal delay-4">
+                    <img src="Screenshot 2026-03-27 at 1.17.02 AM.jpg" alt="Social Proof">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 17: Technical -->
+        <div class="slide">
+            <div class="apple-card">
+                <p class="text-teal-600 font-bold tracking-widest text-xs uppercase mb-2 reveal">Section: Technical SEO</p>
+                <h2 class="text-4xl font-bold mb-10 reveal delay-1">Technical SEO Overview</h2>
+                <div class="grid grid-cols-2 gap-8 flex-grow">
+                    <div class="p-8 bg-teal-50 border border-teal-100 rounded-3xl reveal delay-2">
+                        <h3 class="text-2xl font-bold mb-4 text-teal-800">Crawling</h3>
+                        <p class="text-gray-600">Ensuring search engine bots can effectively read website content.</p>
+                    </div>
+                    <div class="p-8 bg-blue-50 border border-blue-100 rounded-3xl reveal delay-3">
+                        <h3 class="text-2xl font-bold mb-4 text-blue-800">Performance</h3>
+                        <p class="text-gray-600">Enhancing overall website responsiveness and stability.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 18: Technical Components -->
+        <div class="slide">
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-8 reveal">Key Technical Components</h2>
+                <div class="grid grid-cols-2 gap-4 flex-grow reveal delay-1">
+                    <div class="p-6 bg-black/5 rounded-2xl flex justify-between items-center">
+                        <span class="font-semibold">Site Speed</span>
+                        <span class="text-xs text-blue-600 font-bold">Optimized Images</span>
+                    </div>
+                    <div class="p-6 bg-black/5 rounded-2xl flex justify-between items-center">
+                        <span class="font-semibold">Mobile Friendly</span>
+                        <span class="text-xs text-purple-600 font-bold">Responsive Design</span>
+                    </div>
+                    <div class="p-6 bg-black/5 rounded-2xl flex justify-between items-center">
+                        <span class="font-semibold">Indexing</span>
+                        <span class="text-xs text-teal-600 font-bold">Sitemap & Robots.txt</span>
+                    </div>
+                    <div class="p-6 bg-black/5 rounded-2xl flex justify-between items-center">
+                        <span class="font-semibold">Server</span>
+                        <span class="text-xs text-green-600 font-bold">Secure HTTPS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 19: Wix Checklist -->
+        <div class="slide">
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-4 reveal">Wix SEO Checklist</h2>
+                <p class="text-gray-500 mb-6 reveal delay-1">Full completion of foundational setup tasks.</p>
+                <div class="placeholder-box flex-grow reveal delay-2">
+                    <img src="Screenshot 2026-03-27 at 1.16.33 AM.jpg" alt="Wix Checklist">
+                    <p class="absolute bottom-4 text-[10px] font-bold">Actual Implementation: 4/4 Progress</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 20: Meta Setup -->
+        <div class="slide">
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-4 reveal">Meta & SEO Setup</h2>
+                <div class="placeholder-box flex-grow reveal delay-1">
+                    <img src="Screenshot 2026-03-27 at 3.27.44 AM.jpg" alt="Meta Setup">
+                </div>
+                <div class="p-6 bg-black/5 rounded-2xl mt-6 reveal delay-2 text-center">
+                    <p class="text-gray-600 text-sm font-medium">Meta titles & descriptions configured to improve search visibility.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 21: Audit -->
+        <div class="slide">
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-8 reveal">Site Audit Results</h2>
+                <div class="grid grid-cols-3 gap-6 flex-grow reveal delay-1">
+                    <div class="p-6 bg-black/5 rounded-2xl text-center">
+                        <i data-lucide="check" class="text-green-600 mx-auto mb-2"></i>
+                        <p class="text-xs uppercase text-gray-400 font-bold">Errors</p>
+                        <p class="text-xl font-black">Zero</p>
+                    </div>
+                    <div class="p-6 bg-black/5 rounded-2xl text-center">
+                        <i data-lucide="alert-circle" class="text-blue-600 mx-auto mb-2"></i>
+                        <p class="text-xs uppercase text-gray-400 font-bold">Tags</p>
+                        <p class="text-xl font-black">Verified</p>
+                    </div>
+                    <div class="p-6 bg-black/5 rounded-2xl text-center">
+                        <i data-lucide="box" class="text-purple-600 mx-auto mb-2"></i>
+                        <p class="text-xs uppercase text-gray-400 font-bold">Structure</p>
+                        <p class="text-xl font-black">Clean</p>
+                    </div>
+                </div>
+                <div class="placeholder-box mt-6 h-40 reveal delay-2">
+                    <img src="Screenshot 2026-03-27 at 1.16.37 AM.jpg" alt="Audit Proof">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 22: Mobile -->
+        <div class="slide">
+            <div class="apple-card">
+                <p class="text-pink-600 font-bold tracking-widest text-xs uppercase mb-2 reveal">Section: User Experience</p>
+                <h2 class="text-4xl font-bold mb-10 reveal delay-1">Mobile Optimization</h2>
+                <div class="grid grid-cols-2 gap-8 flex-grow">
+                    <div class="placeholder-box reveal delay-2">
+                        <img src="Screenshot 2026-03-27 at 3.28.14 AM.jpg" alt="Mobile UI">
+                    </div>
+                    <div class="flex flex-col justify-center gap-6 reveal delay-3">
+                        <div class="flex items-center gap-4">
+                            <i data-lucide="iphone" class="text-blue-600"></i>
+                            <span class="text-xl font-semibold">Fully Responsive Design</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <i data-lucide="navigation-2" class="text-purple-600"></i>
+                            <span class="text-xl font-semibold">Easy Navigation on Mobile</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 23: Speed -->
+        <div class="slide">
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-10 reveal">Site Speed Optimization</h2>
+                <div class="grid grid-cols-3 gap-6 flex-grow reveal delay-1">
+                    <div class="p-8 bg-black/5 rounded-[40px] text-center border border-black/5">
+                        <p class="text-5xl font-black text-blue-600 mb-4">98</p>
+                        <p class="font-bold">Desktop</p>
+                    </div>
+                    <div class="p-8 bg-black/5 rounded-[40px] text-center border border-black/5">
+                        <p class="text-5xl font-black text-green-600 mb-4">92</p>
+                        <p class="font-bold">Mobile</p>
+                    </div>
+                    <div class="p-8 bg-black/5 rounded-[40px] text-center border border-black/5">
+                        <p class="text-5xl font-black text-purple-600 mb-4">0.8s</p>
+                        <p class="font-bold">LCP</p>
+                    </div>
+                </div>
+                <div class="p-6 bg-black/5 rounded-2xl mt-8 text-center reveal delay-2">
+                    <p class="text-gray-500 text-sm font-medium">Optimized images and minimal design for ultra-fast load times.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 24: Analytics -->
+        <div class="slide">
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-4 reveal">Traffic Overview</h2>
+                <div class="placeholder-box flex-grow reveal delay-1">
+                    <img src="Screenshot 2026-03-27 at 1.16.49 AM.jpg" alt="Analytics">
+                </div>
+                <p class="text-center text-gray-500 mt-6 reveal delay-2 font-medium">Sessions and visitors tracked for in-depth performance analysis.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 25: Expected Outcomes -->
+        <div class="slide">
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-10 reveal">Expected Outcomes</h2>
+                <div class="space-y-4 flex-grow reveal delay-1">
+                    <div class="p-6 bg-blue-50 border border-blue-100 rounded-2xl flex items-center gap-6">
+                        <i data-lucide="eye" class="text-blue-600"></i>
+                        <span class="text-xl font-semibold text-blue-900">Improved organic visibility in local search</span>
+                    </div>
+                    <div class="p-6 bg-purple-50 border border-purple-100 rounded-2xl flex items-center gap-6">
+                        <i data-lucide="trending-up" class="text-purple-600"></i>
+                        <span class="text-xl font-semibold text-purple-900">Higher search engine ranking potential</span>
+                    </div>
+                    <div class="p-6 bg-green-50 border border-green-100 rounded-2xl flex items-center gap-6">
+                        <i data-lucide="smile" class="text-green-600"></i>
+                        <span class="text-xl font-semibold text-green-900">Enhanced student-focused user experience</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 26: Challenges -->
+        <div class="slide">
+            <div class="apple-card">
+                <h2 class="text-4xl font-bold mb-10 reveal">Challenges & Solutions</h2>
+                <div class="grid grid-cols-2 gap-8 flex-grow">
+                    <div class="p-8 bg-red-50 rounded-3xl border border-red-100 reveal delay-1">
+                        <p class="text-xs uppercase text-red-600 font-black mb-4 tracking-widest">Challenge</p>
+                        <p class="text-xl font-bold text-red-900">High competition for broad keywords</p>
+                    </div>
+                    <div class="p-8 bg-green-50 rounded-3xl border border-green-100 reveal delay-2">
+                        <p class="text-xs uppercase text-green-600 font-black mb-4 tracking-widest">Solution</p>
+                        <p class="text-xl font-bold text-green-900">Dominate niche via long-tail keywords</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 27: Conclusion -->
+        <div class="slide">
+            <div class="apple-card items-center justify-center text-center">
+                <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mb-8 shadow-lg reveal">
+                    <i data-lucide="check" class="text-white w-10 h-10"></i>
+                </div>
+                <h2 class="text-5xl font-bold mb-8 reveal delay-1">Conclusion</h2>
+                <div class="space-y-4 max-w-2xl reveal delay-2">
+                    <p class="text-xl text-gray-600 font-medium">Website designed with SEO best practices at the core.</p>
+                    <p class="text-xl text-gray-500">Covers comprehensive On-Page, Off-Page, and Technical SEO layers.</p>
+                </div>
+                <div class="mt-12 p-6 bg-blue-600 text-white rounded-3xl font-black text-xl reveal delay-3 shadow-lg">
+                    READY FOR DEPLOYMENT
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 28: Thank You -->
+        <div class="slide">
+            <div class="apple-card items-center justify-center text-center">
+                <h2 class="text-8xl font-black mb-4 reveal bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">THANK YOU</h2>
+                <p class="text-2xl text-gray-500 font-medium reveal delay-1">Building digital bridges for LPU students.</p>
+                
+                <div class="mt-20 reveal delay-2">
+                    <p class="text-sm font-bold text-blue-600 uppercase tracking-widest mb-2">Developed By</p>
+                    <p class="text-3xl font-bold">Garvita Goswami</p>
+                    <p class="text-gray-400 mt-2 font-semibold">MKT 905 | SEO Strategy Project</p>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <!-- UI NAV -->
+    <!-- UI Dock -->
     <div class="nav-dock">
-        <button onclick="changeSlide(-1)" id="prevBtn" class="nav-arrow" disabled>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+        <button onclick="moveSlide(-1)" id="prevBtn" class="dock-btn" disabled>
+            <i data-lucide="chevron-left"></i>
         </button>
-        <div class="dot-nav" id="dots"></div>
-        <button onclick="changeSlide(1)" id="nextBtn" class="nav-arrow">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+        <div class="progress-indicator" id="progressText">1 / 28</div>
+        <button onclick="moveSlide(1)" id="nextBtn" class="dock-btn">
+            <i data-lucide="chevron-right"></i>
         </button>
     </div>
 
     <script>
-        let current = 0;
+        let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        const wrapper = document.getElementById('slider');
-        const dotsContainer = document.getElementById('dots');
+        const wrapper = document.getElementById('slideWrapper');
+        const progressText = document.getElementById('progressText');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
 
-        // Build dots
-        slides.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.className = `dot ${i === 0 ? 'active' : ''}`;
-            dot.onclick = () => goToSlide(i);
-            dotsContainer.appendChild(dot);
-        });
+        function updateSlide() {
+            wrapper.style.transform = `translateX(-${currentSlide * 100}vw)`;
+            
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === currentSlide);
+            });
 
-        const dots = document.querySelectorAll('.dot');
-
-        function update() {
-            wrapper.style.transform = `translateX(-${current * 100}vw)`;
-            slides.forEach((s, i) => s.classList.toggle('active', i === current));
-            dots.forEach((d, i) => d.classList.toggle('active', i === current));
-            prevBtn.disabled = current === 0;
-            nextBtn.disabled = current === slides.length - 1;
+            progressText.innerText = `${currentSlide + 1} / ${slides.length}`;
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slides.length - 1;
         }
 
-        function changeSlide(dir) {
-            current = Math.max(0, Math.min(slides.length - 1, current + dir));
-            update();
-        }
-
-        function goToSlide(idx) {
-            current = idx;
-            update();
+        function moveSlide(dir) {
+            currentSlide = Math.max(0, Math.min(slides.length - 1, currentSlide + dir));
+            updateSlide();
         }
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
-            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight' || e.key === ' ') moveSlide(1);
+            if (e.key === 'ArrowLeft') moveSlide(-1);
         });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
 </body>
 </html>
